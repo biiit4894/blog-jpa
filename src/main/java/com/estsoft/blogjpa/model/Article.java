@@ -16,17 +16,21 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Article {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @Getter
     @Column(name = "title", nullable = false)
     private String title;
 
+    @Getter
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Getter
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -43,22 +47,6 @@ public class Article {
 
     public Article() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
     }
 
     public ArticleResponse toResponse() {
