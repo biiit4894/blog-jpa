@@ -9,6 +9,7 @@ import com.estsoft.blogjpa.repository.BlogRepository;
 import com.estsoft.blogjpa.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -35,5 +36,20 @@ public class CommentService {
                 .body(request.getBody())
                 .build();
         return commentRepository.save(comment);
+    }
+
+    public Comment getCommentById(Long articleId, Long commentId) {
+        Optional<Article> optionalArticle = blogRepository.findById(articleId);
+        if(optionalArticle.isEmpty()) {
+            throw new ArticleNotFoundException("Article not found");
+        }
+        Article article = optionalArticle.get();
+
+        for(Comment comment : article.getCommentList()) {
+            if(comment.getId().equals(commentId)) {
+                return comment;
+            }
+        }
+        throw new RuntimeException();
     }
 }

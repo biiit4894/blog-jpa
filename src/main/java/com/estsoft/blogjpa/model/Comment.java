@@ -1,6 +1,7 @@
 package com.estsoft.blogjpa.model;
 
 import com.estsoft.blogjpa.dto.CommentResponse;
+import com.estsoft.blogjpa.dto.CommentViewResponse;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,6 +43,14 @@ public class Comment {
     public CommentResponse toResponse() {
         return CommentResponse.builder()
                 .body(body)
+                .build();
+    }
+
+    public CommentViewResponse toViewResponse() {
+        return CommentViewResponse.builder()
+                .id(id)
+                .body(body)
+                .createdAt(createdAt)
                 .build();
     }
 

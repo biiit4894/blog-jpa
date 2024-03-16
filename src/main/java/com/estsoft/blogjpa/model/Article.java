@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @EntityListeners(AuditingEntityListener.class)
@@ -64,4 +65,7 @@ public class Article {
         this.title = title;
         this.content = content;
     }
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> commentList;
 }
