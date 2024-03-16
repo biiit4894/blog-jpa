@@ -34,7 +34,7 @@ public class BlogPageController {
     @GetMapping("/articles/{id}")
     public String showArticle(@PathVariable Long id, Model model) {
         Article article = blogService.findById(id);
-        model.addAttribute("article", new ArticleViewResponse(article));
+        model.addAttribute("article", article.toViewResponse());
 
         return "article";
     }
