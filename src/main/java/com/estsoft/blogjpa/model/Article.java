@@ -1,7 +1,6 @@
 package com.estsoft.blogjpa.model;
 
-import com.estsoft.blogjpa.dto.ArticleResponse;
-import com.estsoft.blogjpa.dto.ArticleViewResponse;
+import com.estsoft.blogjpa.dto.*;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @EntityListeners(AuditingEntityListener.class)
@@ -60,6 +60,8 @@ public class Article {
         return new ArticleViewResponse(id, title, content, createdAt, updatedAt);
     }
 
+
+
     // 교안 X
     public void update(String title, String content) {
         this.title = title;
@@ -68,4 +70,18 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> commentList;
+
+    public CommentListViewResponse toListViewResponse() {
+        List<CommentViewResponse> commentResponses = this.commentList.stream()
+                .map(Comment::toViewResponse)
+                .toList();
+
+        return CommentListViewResponse.builder()
+                .articleId(id)
+                .title(title)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .comments(commentResponses)
+                .build();
+    }
 }

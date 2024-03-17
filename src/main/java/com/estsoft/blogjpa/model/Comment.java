@@ -1,5 +1,6 @@
 package com.estsoft.blogjpa.model;
 
+import com.estsoft.blogjpa.dto.CommentListViewResponse;
 import com.estsoft.blogjpa.dto.CommentResponse;
 import com.estsoft.blogjpa.dto.CommentViewResponse;
 import jakarta.persistence.*;
@@ -53,5 +54,4 @@ public class Comment {
                 .createdAt(createdAt)
                 .build();
     }
-
 }
