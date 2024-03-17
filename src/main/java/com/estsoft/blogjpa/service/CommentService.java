@@ -61,18 +61,16 @@ public class CommentService {
         }
         Article article = optionalArticle.get();
 
-        // 댓글 목록을 가져와서 DTO로 변환
-        List<CommentViewResponse> commentResponses = article.getCommentList().stream()
+        List<CommentViewResponse> response = article.getCommentList().stream()
                 .map(Comment::toViewResponse)
                 .collect(Collectors.toList());
 
-        // 게시글 정보와 댓글 목록을 포함한 응답 생성
         return CommentListViewResponse.builder()
                 .articleId(article.getId())
                 .title(article.getTitle())
                 .createdAt(article.getCreatedAt())
                 .updatedAt(article.getUpdatedAt())
-                .comments(commentResponses)
+                .comments(response)
                 .build();
     }
 }
