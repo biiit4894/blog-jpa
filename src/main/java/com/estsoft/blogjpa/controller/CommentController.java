@@ -17,11 +17,9 @@ import java.util.Optional;
 
 @RestController
 public class CommentController {
-    private BlogRepository blogRepository;
     private CommentService commentService;
 
-    public CommentController(BlogRepository blogRepository, CommentService commentService) {
-        this.blogRepository = blogRepository;
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
@@ -33,7 +31,7 @@ public class CommentController {
                 .body(response);
     }
 
-    @GetMapping("api/comments/{articleId}")
+    @GetMapping("/api/comments/{articleId}")
     public ResponseEntity<CommentListViewResponse> getCommentsByArticleId(@PathVariable Long articleId) {
         CommentListViewResponse response = commentService.getCommentsByArticleId(articleId);
         return ResponseEntity.status(HttpStatus.OK).body(response);

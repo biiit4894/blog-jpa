@@ -2,6 +2,7 @@ package com.estsoft.blogjpa.service;
 
 import com.estsoft.blogjpa.dto.*;
 import com.estsoft.blogjpa.exception.ArticleNotFoundException;
+import com.estsoft.blogjpa.exception.CommentNotFoundException;
 import com.estsoft.blogjpa.model.Article;
 import com.estsoft.blogjpa.model.Comment;
 import com.estsoft.blogjpa.repository.BlogRepository;
@@ -51,7 +52,7 @@ public class CommentService {
                 return comment;
             }
         }
-        throw new RuntimeException();
+        throw new CommentNotFoundException("Comment Not found"); // comment가 빈 배열이어도 여기로 빠지지 않아서 수정이 필요할듯
     }
 
     public CommentListViewResponse getCommentsByArticleId(Long articleId) {
