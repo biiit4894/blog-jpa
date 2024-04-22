@@ -6,7 +6,7 @@ if(deleteButton) {
         fetch(`/api/articles/${id}`, {
             method: 'DELETE'
         }).then(() => {
-            alert('삭제가 완료되었습니다');
+            alert('삭제가 완료되었습니다.');
             location.replace('/articles');
         });
     })
