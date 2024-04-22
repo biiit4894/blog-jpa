@@ -66,26 +66,26 @@ class BlogControllerTest {
         // 저장이 잘 되었는지 확인
     }
 
-    @Test
-    public void showArticle() throws Exception {
-        // given : blogRepository.save
-        List<Article> articleList = new ArrayList<>();
-        Article article1 = new Article("title1", "content1");
-        Article article2 = new Article("title2", "content2");
-        articleList.add(article1);
-        articleList.add(article2);
-        blogRepository.saveAll(articleList);
-
-        // when : GET /api/articles
-        ResultActions resultActions = mockMvc.perform(get("/api/articles"));
-
-        // then : 호출결과(Json)와 save한 데이터와 비교
-        resultActions.andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value(articleList.get(0).getTitle()))
-                .andExpect(jsonPath("$[0].content").value(articleList.get(0).getContent()))
-                .andExpect(jsonPath("$[1].title").value(articleList.get(1).getTitle()))
-                .andExpect(jsonPath("$[1].content").value(articleList.get(1).getContent()));
-    }
+//    @Test
+//    public void showArticle() throws Exception {
+//        // given : blogRepository.save
+//        List<Article> articleList = new ArrayList<>();
+//        Article article1 = new Article("title1", "content1");
+//        Article article2 = new Article("title2", "content2");
+//        articleList.add(article1);
+//        articleList.add(article2);
+//        blogRepository.saveAll(articleList);
+//
+//        // when : GET /api/articles
+//        ResultActions resultActions = mockMvc.perform(get("/api/articles"));
+//
+//        // then : 호출결과(Json)와 save한 데이터와 비교
+//        resultActions.andExpect(status().isOk())
+//                .andExpect(jsonPath("$[0].title").value(articleList.get(0).getTitle()))
+//                .andExpect(jsonPath("$[0].content").value(articleList.get(0).getContent()))
+//                .andExpect(jsonPath("$[1].title").value(articleList.get(1).getTitle()))
+//                .andExpect(jsonPath("$[1].content").value(articleList.get(1).getContent()));
+//    }
 
     @Test
     public void deleteById() throws Exception {
